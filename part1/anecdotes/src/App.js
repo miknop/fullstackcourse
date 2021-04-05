@@ -6,6 +6,20 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
+function findMaximum(array) {
+  var max = 0;
+  var pos = 0;
+
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index];
+    if (element > max) {
+      max = element;
+      pos = index;
+    }
+  }
+  return pos;
+}
+
 const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
@@ -25,6 +39,7 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]} <br />
       has {votes[selected]} votes <br />
       <Button
@@ -39,6 +54,8 @@ const App = () => {
         handleClick={() => setSelected(getRandomIntInclusive(0, 5))}
         text="next anecdote"
       />
+      <h1>Anecdote with the most votes</h1>
+      {anecdotes[findMaximum(votes)]}
     </div>
   );
 };
