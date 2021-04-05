@@ -21,10 +21,20 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Uint8Array(6));
 
   return (
     <div>
       {anecdotes[selected]} <br />
+      has {votes[selected]} votes <br />
+      <Button
+        handleClick={() => {
+          const copy = [...votes];
+          copy[selected] += 1;
+          setVotes(copy);
+        }}
+        text="vote"
+      />
       <Button
         handleClick={() => setSelected(getRandomIntInclusive(0, 5))}
         text="next anecdote"
